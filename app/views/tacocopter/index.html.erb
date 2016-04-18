@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Santa Barbara Tacocopter</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <form name="search" action="/tacocopter/show" method="get">
+  Select Tacos to Find:
+  <br>
+  <p>
+    <% @tacos.each do |taco| %>
+      &emsp;<input type="checkbox" name="taco[]" value="<%= taco.name %>" id="<%= taco.name %>"><%= taco.name %><br>
+    <% end %>
+    &emsp;<input type="checkbox" name="taco[]" value="all" id="all_tacos">&lt;one for each taco in the seed file&gt;<br>
+  </p>
+
+  Select Sauces to Find:
+  <p>
+    <% @salsas.each do |salsa| %>
+      &emsp;<input type="checkbox" name="salsa[]" value="<%= salsa.name %>" id="<%= salsa.name %>"><%= salsa.name %><br>
+    <% end %>
+    &emsp;<input type="checkbox" name="salsa[]" value="all" id="all_salsas">&lt;one for each sauce in the seed file&gt;<br>
+  </p>
+
+  <input type="submit" value="Search">
+
+  </form>
+</body>
+</html>

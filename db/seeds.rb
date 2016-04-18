@@ -21,15 +21,15 @@ create_question "All rows and columns from the <code>cities</code> table",
  FROM cities;"
 
 create_question "All rows from the <code>stores</code> table",
-"SELECT * 
+"SELECT *
  FROM stores;"
 
 create_question "All rows from the <code>salsas</code> table",
-"SELECT * 
+"SELECT *
  FROM salsas;"
 
-create_question "All rows from the <code>tacos</code> table", 
-"SELECT * 
+create_question "All rows from the <code>tacos</code> table",
+"SELECT *
  FROM tacos;"
 
 create_question "<code>name</code> and <code>zagat_rating</code> from the <code>stores</code> table",
@@ -37,61 +37,61 @@ create_question "<code>name</code> and <code>zagat_rating</code> from the <code>
  FROM stores;"
 
 create_question '<code>name</code> from the <code>salsas</code> table',
-"SELECT name 
+"SELECT name
  FROM salsas;"
 
  create_question '<code>name</code> and <code>vegetarian</code> from the <code>tacos</code> table',
-"SELECT name, vegetarian 
+"SELECT name, vegetarian
  FROM tacos;"
 
 create_question '<code>name</code> and <code>allows_drones</code> from the <code>cities</code> table',
-"SELECT name, allows_drones 
+"SELECT name, allows_drones
  FROM cities;"
 
 #---Filtering---
 
 create_question 'All fields from the <code>cities</code> table for cities that allow drones',
-"SELECT * 
- FROM cities 
+"SELECT *
+ FROM cities
  WHERE allows_drones = true;"
 
 create_question 'All fields from the <code>stores</code> table for stores with a Zagat rating greater than 7',
-"SELECT * 
- FROM stores 
+"SELECT *
+ FROM stores
  WHERE zagat_rating > 7;"
 
 create_question '<code>name</code> from the <code>stores</code> table for stores with a Zagat rating greater than or equal to 8',
-"SELECT name 
- FROM stores 
+"SELECT name
+ FROM stores
  WHERE zagat_rating >= 8;"
 
 create_question '<code>name</code> from the <code>tacos</code> table for vegetarian tacos',
-"SELECT name 
- FROM tacos 
+"SELECT name
+ FROM tacos
  WHERE vegetarian=true;"
 
 create_question '<code>id</code> and <code>name</code> from the <code>stores</code> table for stores that have a Zagat rating less than 5 and don&apos;t sell beer',
-"SELECT id, name 
- FROM stores 
- WHERE zagat_rating < 5 
+"SELECT id, name
+ FROM stores
+ WHERE zagat_rating < 5
  AND sells_beer = false;"
 
 create_question '<code>name</code> and <code>zagat_rating</code> from <code>stores</code> for stores that have either have a Zagat rating greater than 8, or have a Zagat rating greater than 5 and sell beer',
-"SELECT name, zagat_rating 
- FROM stores 
- WHERE zagat_rating > 8 
+"SELECT name, zagat_rating
+ FROM stores
+ WHERE zagat_rating > 8
  OR (zagat_rating > 5 AND sells_beer = true);"
 
 create_question '<code>name</code>, <code>zagat_rating</code>, and <code>sells_beer</code> from <code>stores</code> for stores that have either have a Zagat rating less than 5, or have a Zagat rating less than than 7 and don&apos;t sell beer',
-"SELECT name, zagat_rating, sells_beer 
- FROM stores 
- WHERE zagat_rating < 5 
+"SELECT name, zagat_rating, sells_beer
+ FROM stores
+ WHERE zagat_rating < 5
  OR (zagat_rating < 7 AND sells_beer = false);"
 
 create_question 'All fields from <code>stores</code> that have a <code>zagat_rating</code> between 5 and 7',
-"SELECT * 
- FROM stores 
- WHERE zagat_rating 
+"SELECT *
+ FROM stores
+ WHERE zagat_rating
  BETWEEN 5 AND 7;"
 
  create_question 'All fields from tacos for Pollo and Carne Asada tacos',
@@ -102,91 +102,91 @@ create_question 'All fields from <code>stores</code> that have a <code>zagat_rat
 #--inner join--
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>cities</code> they are in',
-"SELECT * 
- FROM stores 
+"SELECT *
+ FROM stores
  JOIN cities ON stores.city_id = cities.id;"
 
 create_question '<code>name</code> from <code>stores</code> and <code>allows_drones</code> from the city they are in',
-"SELECT stores.name, cities.allows_drones 
- FROM stores 
+"SELECT stores.name, cities.allows_drones
+ FROM stores
  JOIN cities ON stores.city_id = cities.id;"
 
 create_question '<code>name</code> from <code>cites</code> as <code>city_name</code> and <code>name</code> from <code>stores</code> as <code>store_name</code> for all stores',
-"SELECT cities.name as city_name, stores.name as store_name 
- FROM cities 
- JOIN stores 
+"SELECT cities.name as city_name, stores.name as store_name
+ FROM cities
+ JOIN stores
  ON cities.id = stores.city_id;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>cities</code> they are in for cities that allow drones',
-"SELECT * 
- FROM stores 
- JOIN cities ON stores.city_id = cities.id 
+"SELECT *
+ FROM stores
+ JOIN cities ON stores.city_id = cities.id
  WHERE cities.allows_drones = true;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>salsas</code> they serve',
-"SELECT stores.*, salsas.* 
- FROM stores 
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- JOIN salsas ON stores_salsas.salsa_id = salsas.id;"
+"SELECT stores.*, salsas.*
+ FROM stores
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ JOIN salsas ON salsas_stores.salsa_id = salsas.id;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>tacos</code> they serve',
-"SELECT stores.*, tacos.* 
- FROM stores 
+"SELECT stores.*, tacos.*
+ FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos ON stores_tacos.taco_id = tacos.id;"
 
 create_question '<code>name</code> from <code>stores</code>, <code>name</code> from <code>tacos</code>, and <code>price</code>',
-"SELECT stores.name, tacos.name, stores_tacos.price 
- FROM stores 
+"SELECT stores.name, tacos.name, stores_tacos.price
+ FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos ON stores_tacos.taco_id = tacos.id;"
 
 #--Filtering with JOIN
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>cities</code> they are in for stores with a Zagat rating greater than 8',
-"SELECT * 
- FROM stores 
- JOIN cities ON stores.city_id = cities.id 
+"SELECT *
+ FROM stores
+ JOIN cities ON stores.city_id = cities.id
  WHERE stores.zagat_rating > 8;"
 
 create_question 'All fields from <code>stores</code> with Chile de Arbol Salsa',
 "SELECT stores.*
  FROM stores
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- WHERE stores_salsas.salsa_id = 2;"
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ WHERE salsas_stores.salsa_id = 2;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>tacos</code> they serve if they&apos;re vegetarian',
-"SELECT stores.*, tacos.* 
- FROM stores 
+"SELECT stores.*, tacos.*
+ FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos ON stores_tacos.taco_id = tacos.id
  WHERE tacos.vegetarian = true;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>cities</code> they are in for cities that allow drones and stores that serve beer and have a zagat rating greater than 7',
-"SELECT stores.*, cities.* 
- FROM stores 
- JOIN cities ON stores.city_id = cities.id 
- WHERE cities.allows_drones = true 
- AND stores.sells_beer = true 
+"SELECT stores.*, cities.*
+ FROM stores
+ JOIN cities ON stores.city_id = cities.id
+ WHERE cities.allows_drones = true
+ AND stores.sells_beer = true
  AND stores.zagat_rating > 7;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>salsas</code> they serve if the store sells beer',
-"SELECT stores.*, salsas.* 
- FROM stores 
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- JOIN salsas ON stores_salsas.salsa_id = salsas.id
+"SELECT stores.*, salsas.*
+ FROM stores
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ JOIN salsas ON salsas_stores.salsa_id = salsas.id
  WHERE stores.sells_beer = true;"
 
 create_question 'All fields from <code>stores</code> plus all fields from the <code>salsas</code> they serve if the spiciness is 8 or 7',
-"SELECT stores.*, salsas.* 
- FROM stores 
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- JOIN salsas ON stores_salsas.salsa_id = salsas.id
- WHERE stores_salsas.spiciness IN (8, 7);"
+"SELECT stores.*, salsas.*
+ FROM stores
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ JOIN salsas ON salsas_stores.salsa_id = salsas.id
+ WHERE salsas_stores.spiciness IN (8, 7);"
 
 create_question '<code>name</code> from <code>stores</code>, <code>name</code> from <code>tacos</code>, and </code>price</code> where the store sells beer, the taco is not vegetarian and the price is less $3.50',
-"SELECT stores.name, tacos.name, stores_tacos.price 
- FROM stores 
+"SELECT stores.name, tacos.name, stores_tacos.price
+ FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos ON stores_tacos.taco_id = tacos.id
  WHERE stores.sells_beer = true
@@ -194,44 +194,44 @@ create_question '<code>name</code> from <code>stores</code>, <code>name</code> f
  AND stores_tacos.price < 3.50;"
 
 create_question 'name from <code>stores</code>, name from <code>cities</code>, name from <code>salsas</code>, and spiciness where the city allows drones and the salsa spiciness is between 4 and 6',
-"SELECT stores.name, cities.name, salsas.name, stores_salsas.spiciness 
- FROM stores 
+"SELECT stores.name, cities.name, salsas.name, salsas_stores.spiciness
+ FROM stores
  JOIN cities ON stores.city_id = cities.id
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- JOIN salsas ON stores_salsas.salsa_id = salsas.id
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ JOIN salsas ON salsas_stores.salsa_id = salsas.id
  WHERE cities.allows_drones = true
- AND stores_salsas.spiciness BETWEEN 4 AND 6;"
+ AND salsas_stores.spiciness BETWEEN 4 AND 6;"
 
 create_question 'Stores with Al Pastor tacos and Chile de Arbol Salsa',
 "SELECT stores.*
 FROM stores
-JOIN stores_salsas ON stores.id = stores_salsas.store_id
+JOIN salsas_stores ON stores.id = salsas_stores.store_id
 JOIN stores_tacos ON stores.id = stores_tacos.store_id
-WHERE stores_salsas.salsa_id = 2
+WHERE salsas_stores.salsa_id = 2
 AND stores_tacos.taco_id = 4;"
 
 create_question 'Stores with Al Pastor tacos and Zagat rating > 9 and and Chile de Arbol Salsa',
 "SELECT stores.*
  FROM stores
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
- WHERE stores_salsas.salsa_id = 2
+ WHERE salsas_stores.salsa_id = 2
  AND stores_tacos.taco_id = 4
  AND stores.zagat_rating > 8;"
 
 create_question 'Stores with Al Pastor tacos and Zagat rating > 9 and Chile de Arbol Salsa with spiciness higher than 7',
 "SELECT stores.*
 FROM stores
-JOIN stores_salsas ON stores.id = stores_salsas.store_id
+JOIN salsas_stores ON stores.id = salsas_stores.store_id
 JOIN stores_tacos ON stores.id = stores_tacos.store_id
-WHERE stores_salsas.salsa_id = 2
+WHERE salsas_stores.salsa_id = 2
 AND stores_tacos.taco_id = 4
 AND stores.zagat_rating > 8
-AND stores_salsas.spiciness > 7;"
+AND salsas_stores.spiciness > 7;"
 
 create_question 'All fields from <code>stores</code> with a vegetarian taco',
 "SELECT DISTINCT stores.*
- FROM stores 
+ FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos ON stores_tacos.taco_id = tacos.id
  WHERE tacos.vegetarian = true;"
@@ -242,7 +242,7 @@ create_question 'Stores with vegetarian tacos with price < $3.50',
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
  JOIN tacos on stores_tacos.taco_id = tacos.id
  WHERE tacos.vegetarian
- AND stores_tacos.price < 3.50;" 
+ AND stores_tacos.price < 3.50;"
 
 create_question 'Stores with vegetarian tacos and tacos < $3.50',
 "SELECT DISTINCT stores.*
@@ -272,14 +272,14 @@ create_question 'Store <code>name</code>, city <code>name</code> and <code>hot_w
  JOIN cities ON stores.city_id = cities.id;"
 
 create_question 'Store <code>name</code>, and spiciness of Pico de Gallo if they have it',
-"SELECT stores.name, stores_salsas.spiciness
+"SELECT stores.name, salsas_stores.spiciness
  FROM stores
- LEFT JOIN stores_salsas ON stores.id = stores_salsas.store_id
-                        AND stores_salsas.salsa_id = 3;"
+ LEFT JOIN salsas_stores ON stores.id = salsas_stores.store_id
+                        AND salsas_stores.salsa_id = 3;"
 
 create_question 'City <code>name</code> and <code>hot_wax</code> for all cities, even if they have no stores',
 "SELECT cities.name, car_washes.hot_wax
- FROM cities 
+ FROM cities
  LEFT JOIN stores ON cities.id = stores.city_id
  LEFT JOIN car_washes ON stores.id = car_washes.store_id;"
 
@@ -291,14 +291,14 @@ create_question 'Store <code>name</code>, <code>hot_wax</code> and price of Al P
                        AND stores_tacos.taco_id = 4;"
 
 q = create_question 'Store name for stores that don&apos;t have a car wash',
-"SELECT stores.name 
+"SELECT stores.name
  FROM stores
  LEFT JOIN car_washes ON stores.id = car_washes.store_id
  WHERE car_washes.id IS NULL;"
 q.answers.create({ answer: 'SELECT stores.name
                   FROM stores
                   WHERE stores.id NOT IN
-                  (SELECT store_id 
+                  (SELECT store_id
                    FROM car_washes);'})
 q = create_question 'Stores that don&apos;t serve an Al Pastor taco',
 "SELECT stores.*
@@ -307,7 +307,7 @@ q = create_question 'Stores that don&apos;t serve an Al Pastor taco',
                        AND stores_tacos.taco_id = 4
 WHERE stores_tacos.id IS NULL;"
 q.answers.create!({answer: "SELECT stores.*
-                           FROM stores 
+                           FROM stores
                            WHERE stores.id NOT IN (
                              SELECT id
                              FROM stores
@@ -316,7 +316,7 @@ q.answers.create!({answer: "SELECT stores.*
                            )"})
 
 #--Aggregating--
-  
+
 create_question 'All rows from <code>cities</code> and number of stores',
 "SELECT cities.id, cities.name, COUNT(stores.*)
  FROM cities JOIN stores ON cities.id = stores.city_id
@@ -400,8 +400,8 @@ create_question 'Stores with carne asada tacos and chili de arbol salsa',
  FROM stores
  JOIN stores_tacos ON stores.id = stores_tacos.store_id
                   AND stores_tacos.taco_id = 1
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
-                   AND stores_salsas.salsa_id = 3;"
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+                   AND salsas_stores.salsa_id = 3;"
 
 create_question 'Stores with carne asada tacos and pollo tacos',
 "SELECT DISTINCT stores.*
@@ -437,8 +437,8 @@ create_question 'Stores with Al Pastor and Birria and Zagat rating > 7 and Chile
                            AND pastor.taco_id = 4
  JOIN stores_tacos AS birria ON stores.id = birria.store_id
                            AND birria.taco_id = 2
- JOIN stores_salsas ON stores.id = stores_salsas.store_id
- WHERE stores_salsas.salsa_id = 2
+ JOIN salsas_stores ON stores.id = salsas_stores.store_id
+ WHERE salsas_stores.salsa_id = 2
  AND stores.zagat_rating > 7;"
 
 create_question 'City name and count of vegetarian stores',
@@ -475,11 +475,11 @@ q = create_question 'store name and price of taco bonanza for stores that sell a
    SELECT stores_tacos.store_id
    FROM stores_tacos
    WHERE stores_tacos.taco_id = 1
-) 
+)
 AND stores.id IN (
-   SELECT stores_salsas.store_id
-   FROM stores_salsas
-   WHERE stores_salsas.salsa_id = 3
+   SELECT salsas_stores.store_id
+   FROM salsas_stores
+   WHERE salsas_stores.salsa_id = 3
 )
 GROUP BY stores.id;"
 q.answers.create!({
@@ -491,8 +491,8 @@ q.answers.create!({
              FROM stores
              JOIN stores_tacos ON stores.id = stores_tacos.store_id
                               AND stores_tacos.taco_id = 1
-             JOIN stores_salsas ON stores.id = stores_salsas.store_id
-                               AND stores_salsas.salsa_id = 3
+             JOIN salsas_stores ON stores.id = salsas_stores.store_id
+                               AND salsas_stores.salsa_id = 3
             )
             GROUP BY stores.id;"
 })
@@ -513,8 +513,8 @@ create_question 'List of stores with no salsa spicier than 7',
  WHERE stores.id NOT IN (
    SELECT stores.id
    FROM stores
-   JOIN stores_salsas ON stores.id = stores_salsas.store_id
-   WHERE stores_salsas.spiciness > 7
+   JOIN salsas_stores ON stores.id = salsas_stores.store_id
+   WHERE salsas_stores.spiciness > 7
  );"
 
 create_question 'List of stores in Montecito with no salsa spicier than 7',
@@ -523,8 +523,8 @@ create_question 'List of stores in Montecito with no salsa spicier than 7',
  WHERE stores.id NOT IN (
    SELECT stores.id
    FROM stores
-   JOIN stores_salsas ON stores.id = stores_salsas.store_id
-   WHERE stores_salsas.spiciness > 7
+   JOIN salsas_stores ON stores.id = salsas_stores.store_id
+   WHERE salsas_stores.spiciness > 7
 )
 AND stores.city_id = 3;"
 
@@ -534,8 +534,8 @@ create_question 'List of stores in Montecito or Santa Barbara with no salsa spic
  WHERE stores.id NOT IN (
    SELECT stores.id
    FROM stores
-   JOIN stores_salsas ON stores.id = stores_salsas.store_id
-   WHERE stores_salsas.spiciness > 7
+   JOIN salsas_stores ON stores.id = salsas_stores.store_id
+   WHERE salsas_stores.spiciness > 7
 )
 AND stores.city_id IN (3, 2);"
 
@@ -573,7 +573,7 @@ create_question 'City, rating and name of highest rated store by city',
    FROM cities
    JOIN stores on cities.id = stores.city_id
    GROUP BY cities.id
- ) AS sub ON sub.city_id = cities.id 
+ ) AS sub ON sub.city_id = cities.id
           AND stores.zagat_rating = max_rating;"
 
 create_question 'City name, store name, taco name and price of most expensive taco by city',

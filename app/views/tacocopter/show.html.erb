@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Santa Barbara Tacocopter | Stores</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <style>
+    table {
+      margin: 10px;
+      width: 400px;
+      border-collapse: collapse;
+    }
+    table, td, th {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    </style>
+</head>
+<body>
+  Stores matching your requirements:
+  <br>
+  <p>
+    <table>
+      <tr>
+        <th>Store</th>
+        <th>City</th>
+      </tr>
+      <% @stores.each do |store| %>
+        <tr>
+          <td><%= store.name %></td>
+          <td><%= store.city.name %></td>
+        </tr>
+      <% end %>
+    </table>
+  </p>
+</body>
+</html>

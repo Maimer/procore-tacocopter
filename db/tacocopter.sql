@@ -51,8 +51,8 @@ BEGIN;
     name varchar(255)
   );
 
-  DROP TABLE IF EXISTS stores_salsas CASCADE;
-  CREATE TABLE stores_salsas
+  DROP TABLE IF EXISTS salsas_stores CASCADE;
+  CREATE TABLE salsas_stores
   (
     id serial PRIMARY KEY,
     store_id int REFERENCES stores,
@@ -79,7 +79,7 @@ BEGIN;
   (8, 'California Market', 3, false, 3),
   (9, 'Dan''s Bait Shop', 3, false, 2),
   (10, 'Archibald''s Bistro', 3, true, 6),
-  (11, 'Tri Tip Market', 4, false, 8), 
+  (11, 'Tri Tip Market', 4, false, 8),
   (12, 'Reyes Market', 5, false, 10),
   (13, 'Rincon Alteño', 5, false, 8),
   (14, 'Don Roge', 5, true, 9),
@@ -186,7 +186,7 @@ BEGIN;
   (13, 2, 2.95),
   (13, 3, 2.95),
   (13, 10, 2.50),
-  (14, 2, 3.25), 
+  (14, 2, 3.25),
   (14, 3, 3.25),
   (14, 4, 3.25),
   (14, 5, 3.25),
@@ -198,7 +198,7 @@ BEGIN;
   (15, 4, 3.50),
   (15, 5, 3.50),
   (15, 6, 3.50),
-  (16, 2, 3.25), 
+  (16, 2, 3.25),
   (16, 3, 3.25),
   (16, 4, 3.25),
   (16, 5, 3.25),
@@ -211,7 +211,7 @@ BEGIN;
   (17, 2, 4.00);
 
 
-INSERT INTO stores_salsas (store_id, salsa_id, spiciness) VALUES
+INSERT INTO salsas_stores (store_id, salsa_id, spiciness) VALUES
    --Goletta
   --1. Juan's tacos #all same price, no vegetarian
   (1, 1, 5),
@@ -285,7 +285,7 @@ INSERT INTO stores_salsas (store_id, salsa_id, spiciness) VALUES
   --16. Don Roge #2 -- same menu plus additional
   (16, 1, 8),
   (16, 2, 8),
-  (16, 3, 4), 
+  (16, 3, 4),
   (16, 4, 7),
   (16, 5, 9),
   (16, 6, 2),
